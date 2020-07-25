@@ -1,0 +1,12 @@
+[Unit]
+Description=Beerpi fridge controller
+
+After=network.target
+
+[Service]
+User=pi
+ExecStart=/usr/bin/python3 /home/pi/beerpi/beerpi.py
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

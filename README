@@ -1,0 +1,26 @@
+# BeerPi
+
+Simple python program to control a fridge with a temperature sensor, cooling and heating. It is used to control fermenation of beer.
+
+There is no intelligence in this script, it simply listens and publishes on an MQTT server. The actual logic is handled by another program, in this case home assistant.
+
+## Hardware:
+- Relay module (4CH, only using 2 channels)
+- DS18B20 (temperature sensor)
+- Raspberry pi zero w
+
+## Connecting
+
+The Pi has the following GPIO connections:
+- Relay channel 1 (cooling): 20
+- Relay channel 2 (heating): 21
+- DS18B20 on the one wire interface: pin 4
+
+## Setup OS
+Simply flash a raspbian or something to a SD card, to make sure it boots headless:
+- Create a wpa_supplicant.conf: https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
+- add an ssh file: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
+- Activate the one-wire inteface (boot.cfg): https://www.raspberrypi-spy.co.uk/2018/02/enable-1-wire-interface-raspberry-pi/
+- clone the repo
+- install the dependencies
+- copy the systemd file to /lib/systemd/system/beerpi.service

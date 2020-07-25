@@ -5,7 +5,15 @@ import time
 
 # These are files
 from config import *
-import utils
+from utils import *
+
+GPIO.setmode(GPIO.BCM)
+
+# Set the outputs for the realy, initialize as off
+GPIO.setup(COOL_GPIO, GPIO.OUT)
+GPIO.setup(HEAT_GPIO, GPIO.OUT)
+GPIO.output(COOL_GPIO, GPIO.HIGH)
+GPIO.output(HEAT_GPIO, GPIO.HIGH)
 
 
 def on_connect(client, userdata, flags, rc):
