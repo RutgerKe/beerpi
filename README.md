@@ -25,10 +25,13 @@ Simply flash a raspbian or something to a SD card, to make sure it boots headles
 # This software
 - Install some tools `apt install python3-pip git`
 - Clone the repo `git clone https://github.com/RutgerKe/beerpi.git`, enter it `cd beerpi`
-- Istall the dependencies `pip install -f requirements.txt`
-- copy the systemd service file to `/lib/systemd/system/beerpi.service` and enable it `systemctl enable beerpi`
+- Istall the dependencies `pip3 install -r requirements.txt`
+- Copy the systemd service file: `sudo cp beerpi.service /lib/systemd/system/` and enable it `sudo systemctl enable beerpi`
 
 The service script works on a raspberry pi default installation when cloning from the home folder. It also runs as the pi user, you might want to change those things.
 
 ## Configuration
 Everything I've wanted to change is in the `config.py` file, just edit that and restart the service
+
+## Debugging
+A flaky connection or some other thing can cause the script to fail, you can checkout `systemctl status beerpi` to see if it is running, it usually shows a few last lines of output. Checkout the `/var/log/daemon.log` file for more output: `tail -f /var/log/daemon.log`
