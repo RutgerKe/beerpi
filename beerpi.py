@@ -63,7 +63,7 @@ client.loop_start()
 
 # So we can loop forever
 while True:
-    temperature = read_temp()
+    temperature = round(read_temp(), 2)
     logging.info("Temp: " + str(temperature))
     client.publish(TEMP_MQTT_TOPIC, str(temperature))
     time.sleep(TEMP_READ_INTERVAL)
