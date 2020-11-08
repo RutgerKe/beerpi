@@ -24,7 +24,6 @@ def on_connect(client, userdata, flags, rc):
 
 def on_disconnect(client, userdata, rc=0):
     logging.info("Disconnected with result code " + str(rc))
-    client.loop_stop()
 
 
 def on_message(client, userdata, msg):
