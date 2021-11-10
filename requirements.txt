@@ -1,2 +1,3 @@
 RPi.GPIO
 paho-mqtt
+prometheus-client

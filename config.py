@@ -6,12 +6,15 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Currently no authentication on client level implemented
 # Should be really easy to add
-MQTT_HOST = "10.80.30.10"
+MQTT_HOST = "10.80.30.11"
 MQTT_PORT = 1883
 # We end both with a slash, and append the string of the topics below
 # (FRIDGE_COOL_TOPIC and FRIDGE_HEAT_TOPIC) for the specific topics
 MQTT_RELAY_READ = "raspberry/switch/"
 MQTT_RELAY_PUBLISH = "raspberry/switch_state/"
+
+# Listen for data from an ispinel-like device, usually in the beer
+MQTT_BREWBRAIN_TOPIC = "float/ispindel_base"
 
 # How often to read the temperature and send to mqtt server
 # In seconds
@@ -19,9 +22,9 @@ TEMP_READ_INTERVAL = 60
 TEMP_MQTT_TOPIC = "raspberry/temperature/1"
 
 # The settings for the two relays
-COOL_GPIO = 20
-HEAT_GPIO = 21
-FRIDGE_COOL_TOPIC = "2"
-FRIDGE_HEAT_TOPIC = "1"
+COOL_GPIO = 21
+HEAT_GPIO = 20
+FRIDGE_COOL_TOPIC = "1"
+FRIDGE_HEAT_TOPIC = "2"
 RELAY_OFF_PAYLOAD = b"1"
 RELAY_ON_PAYLOAD = b"0"
