@@ -94,6 +94,7 @@ while True:
     beer_temperature = round(pt100.temperature, 2)
     logging.info("Temp: " + str(temperature) + ", PT100: " + beer_temperature)
     client.publish(TEMP_MQTT_TOPIC, str(temperature))
-    fridge_temp_gauge.set(temperature)
     client.publish(BEER_TEMP_MQTT_TOPIC, str(beer_temperature))
+    fridge_temp_gauge.set(temperature)
+    beer_temp_gauge.set(beer_temperature)
     time.sleep(TEMP_READ_INTERVAL)
