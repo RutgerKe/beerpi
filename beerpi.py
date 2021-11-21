@@ -1,12 +1,12 @@
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
-from prometheus_client import start_http_server, Gauge, Counter
 import logging
 import time
 
 # These are files
 from config import *
 from utils import *
+from metrics import *
 
 GPIO.setmode(GPIO.BCM)
 
@@ -15,18 +15,6 @@ GPIO.setup(COOL_GPIO, GPIO.OUT)
 GPIO.setup(HEAT_GPIO, GPIO.OUT)
 GPIO.output(COOL_GPIO, GPIO.HIGH)
 GPIO.output(HEAT_GPIO, GPIO.HIGH)
-
-fridge_temp_gauge = Gauge('fridge_temp', 'Temperature inside fermentation fridge')
-fridge_cooling_gauge = Gauge('fridge_cooling_status', 'Fridge cooling turned on or not')
-fridge_cooling_counter = Counter('fridge_cooling_total', 'Total times fridge cooling turned on')
-fridge_heating_gauge = Gauge('fridge_heating_status', 'Fridge heating turned on or not')
-fridge_heating_counter = Counter('fridge_heating_total', 'Total times fridge heating turned on')
-
-ispindel_temp_gauge = Gauge('ispindel_temp', 'Temperature according to the ispindel')
-ispindel_gravity_gauge = Gauge('ispindel_sg', 'Gravity according to the ispindel inside fermentation fridge')
-ispindel_angle_gauge = Gauge('ispindel_angle', 'Angle of to the ispindel')
-ispindel_battery_gauge = Gauge('ispindel_battery', 'Battery of the ispindel')
-ispindel_rssi_gauge = Gauge('ispindel_rssi', 'WiFi RSSI of the ispindel')
 
 def on_connect(client, userdata, flags, rc):
     logging.info("Connected with result code " + str(rc))
@@ -88,9 +76,6 @@ client.connect(MQTT_HOST, MQTT_PORT, 60)
 
 # Non-blocking loop
 client.loop_start()
-
-# Start a server to expose prometheus-style metrics
-start_http_server(8000)
 
 # So we can loop forever
 while True:
