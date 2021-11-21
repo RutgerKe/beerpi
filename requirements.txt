@@ -1,3 +1,5 @@
 RPi.GPIO
 paho-mqtt
 prometheus-client
+adafruit-circuitpython-max31865
+

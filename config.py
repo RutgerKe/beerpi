@@ -1,4 +1,5 @@
 import logging
+import board
 
 # Debug level of info prints the temperature every minute, might be
 # too much data
@@ -20,6 +21,10 @@ MQTT_BREWBRAIN_TOPIC = "float/ispindel_base"
 # In seconds
 TEMP_READ_INTERVAL = 60
 TEMP_MQTT_TOPIC = "raspberry/temperature/1"
+BEER_TEMP_MQTT_TOPIC = "raspberry/temperature/2"
+
+# Pin for PT100
+PT100_PIN = board.D5
 
 # The settings for the two relays
 COOL_GPIO = 21

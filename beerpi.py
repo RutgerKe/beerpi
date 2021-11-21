@@ -3,6 +3,11 @@ import paho.mqtt.client as mqtt
 import logging
 import time
 
+# For reading the PT100
+import digitalio
+import adafruit_max31865
+import board
+
 # These are files
 from config import *
 from utils import *
@@ -10,11 +15,17 @@ from metrics import *
 
 GPIO.setmode(GPIO.BCM)
 
-# Set the outputs for the realy, initialize as off
+# Set the outputs for the relay, initialize as off
 GPIO.setup(COOL_GPIO, GPIO.OUT)
 GPIO.setup(HEAT_GPIO, GPIO.OUT)
 GPIO.output(COOL_GPIO, GPIO.HIGH)
 GPIO.output(HEAT_GPIO, GPIO.HIGH)
+
+# Setup PT100 via MAX31865 board
+spi = board.SPI()
+cs = digitalio.DigitalInOut(PT100_PIN)
+pt100 = adafruit_max31865.MAX31865(spi, cs)
+
 
 def on_connect(client, userdata, flags, rc):
     logging.info("Connected with result code " + str(rc))
@@ -80,7 +91,9 @@ client.loop_start()
 # So we can loop forever
 while True:
     temperature = round(read_temp(), 2)
-    logging.info("Temp: " + str(temperature))
+    beer_temperature = round(pt100.temperature, 2)
+    logging.info("Temp: " + str(temperature) + ", PT100: " + beer_temperature)
     client.publish(TEMP_MQTT_TOPIC, str(temperature))
     fridge_temp_gauge.set(temperature)
+    client.publish(BEER_TEMP_MQTT_TOPIC, str(beer_temperature))
     time.sleep(TEMP_READ_INTERVAL)
