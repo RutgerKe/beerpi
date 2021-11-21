@@ -20,8 +20,8 @@ MQTT_BREWBRAIN_TOPIC = "float/ispindel_base"
 # How often to read the temperature and send to mqtt server
 # In seconds
 TEMP_READ_INTERVAL = 60
-TEMP_MQTT_TOPIC = "raspberry/temperature/1"
-BEER_TEMP_MQTT_TOPIC = "raspberry/temperature/2"
+#TEMP_MQTT_TOPIC = "raspberry/temperature/1"
+BEER_TEMP_MQTT_TOPIC = "raspberry/temperature/1"
 
 # Pin for PT100
 PT100_PIN = board.D5

@@ -2,7 +2,7 @@ from prometheus_client import Gauge, Counter, start_http_server
 
 mqtt_server_connected = Counter('mqtt_server_connected', 'Total times connected to MQTT server')
 
-beer_temp_gauge = Gauge('fridge_temp', 'Temperature inside the fermentation bucket')
+beer_temp_gauge = Gauge('beer_temp', 'Temperature inside the fermentation bucket')
 fridge_temp_gauge = Gauge('fridge_temp', 'Temperature inside the fermentation fridge')
 fridge_cooling_gauge = Gauge('fridge_cooling_status', 'Fridge cooling turned on or not')
 fridge_cooling_counter = Counter('fridge_cooling_total', 'Total times fridge cooling turned on')
